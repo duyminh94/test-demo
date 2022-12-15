@@ -38,7 +38,7 @@ const AuthLayout = () => {
                             <h2> Welcome to Jira</h2>
                             <h6>To access, please login</h6>
                             <div className='btn btn-info text-success' >
-                                <Link to="/login" style={{textDecoration: "none"}}>
+                                <Link to="login" style={{textDecoration: "none"}}>
                                     Login
                                 </Link>
                             </div>

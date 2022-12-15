@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import localServices from "./localServices";
 
 const fetcher = axios.create({
   baseURL: "https://jiranew.cybersoft.edu.vn/api",
@@ -9,24 +9,23 @@ const fetcher = axios.create({
   },
 });
 fetcher.interceptors.response.use(
-    (response) => {
-        return response.data.content
-    },
-    (error) => {
-        return Promise.reject(error.response?.data.content)
-    }
-)
+  (response) => {
+    return response.data.content;
+  },
+  (error) => {
+    return Promise.reject(error.response.data.message);
+  }
+);
 
 fetcher.interceptors.request.use(
-    (config) => {
-        const { accessToken } = JSON.parse(localStorage.getItem("user")) || {};
-        if(accessToken){
-            config.headers.Authorization = `Bearer ${accessToken}`
-        }
-        return config
-    },
-    (error) => {
-        return Promise.reject(error)
-    }
-)
-export default fetcher
+  (config) => {
+    config.headers.Authorization = `Bearer ${
+      localServices.user.get()?.accessToken
+    }`;
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+export default fetcher;

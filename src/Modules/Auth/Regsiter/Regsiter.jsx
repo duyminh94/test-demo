@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch} from "react-redux";
 import { Button, Form, Input, Layout } from "antd";
 import { MailOutlined, PhoneOutlined, UserOutlined, LockOutlined } from "@ant-design/icons";
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 import useRequest from '../../../Hooks/useRequest';
 import authAPI from '../../../Services/authAPI';
-import { getUsers } from '../../../Slice/userSlice';
 import swal from 'sweetalert2';
 const Regsiter = () => {
-  const dispatch = useDispatch();
+  const navigate = useNavigate()
   const { Sider, Content } = Layout
   const [{ width, height }, setSize] = useState({
     width: Math.round(window.innerWidth),
@@ -28,22 +26,21 @@ const Regsiter = () => {
   const { handleSubmit, control } = useForm({
     defaultValues: {
       email: "",
-      password: "",
+      passWord: "",
       name: "",
       phoneNumber: "",
     },
     mode: "onTouched"
   })
 
-  const {data: handleRegsiter, isloading} = useRequest(
-    (values) => authAPI.regsiter(values),
-    {isManual: true}
+  const { data: handleRegsiter, isloading } = useRequest(
+    authAPI.regsiter,
+    { isManual: true }
   )
 
   const onSubmit = async (values) => {
     try {
-      await handleRegsiter(values)
-      await dispatch(getUsers()).unwrap()
+      await handleRegsiter(values);
       swal.fire({
         title: "Đăng Ký thành công",
         icon: "success",
@@ -57,6 +54,7 @@ const Regsiter = () => {
           left top
           no-repeat`
       })
+      navigate("/login")
     } catch (error) {
       swal.fire({
         text: "Something went wrong!",
@@ -75,7 +73,7 @@ const Regsiter = () => {
       });
     }
   }
-  return (  
+  return (
     <div className="container-fluid p-0" style={{ overflow: "hidden", position: "relative" }}>
       <Layout className="row">
         <Sider className="d-md-block d-none" width={width / 2}
@@ -88,7 +86,7 @@ const Regsiter = () => {
         <Layout>
           <Content>
             <div className="d-flex flex-column align-items-center justify-content-center"
-              style={{ height: height, paddingTop: 150 }}>
+              style={{ height: height, paddingTop: 100 }}>
               <img style={{ width: 50 }} src="https://seeklogo.com/images/J/jira-logo-C71F8C0324-seeklogo.com.png" alt="" />
               <Form onFinish={handleSubmit(onSubmit)} className="container py-5" style={{ height: window.innerHeight }}>
                 <div
@@ -98,7 +96,7 @@ const Regsiter = () => {
                   <h3 className="text-center" style={{ fontWeight: 300, fontSize: 35 }}>
                     Regsiter Jira
                   </h3>
-                  <div className="d-flex mt-3 col-6">
+                  <div className="d-flex mt-1 col-6">
                     <Controller
                       name="email"
                       control={control}
@@ -125,9 +123,9 @@ const Regsiter = () => {
                       )}
                     />
                   </div>
-                  <div className="d-flex mt-3 col-6">
+                  <div className="d-flex mt-1 col-6">
                     <Controller
-                      name="matKhau"
+                      name="passWord"
                       control={control}
                       prefix={<LockOutlined />}
                       rules={{
@@ -151,7 +149,6 @@ const Regsiter = () => {
                           help={error?.message}
                         >
                           <Input.Password
-                            type="password"
                             {...field}
                             placeholder="Mật Khẩu"
                           />
@@ -160,9 +157,9 @@ const Regsiter = () => {
                     />
 
                   </div>
-                  <div className="d-flex mt-3 col-6">
+                  <div className="d-flex mt-1 col-6">
                     <Controller
-                      name="phonenumber"
+                      name="phoneNumber"
                       control={control}
                       prefix={<PhoneOutlined />}
                       rules={{
@@ -183,7 +180,7 @@ const Regsiter = () => {
                           help={error?.message}
                         >
                           <Input
-                            type="phonenumber"
+                            type="phoneNumber"
                             {...field}
                             placeholder="Số Điện Thoại"
                           />
@@ -192,7 +189,7 @@ const Regsiter = () => {
                     />
 
                   </div>
-                  <div className="d-flex mt-3 col-6">
+                  <div className="d-flex mt-1 col-6">
                     <Controller
                       name="name"
                       control={control}

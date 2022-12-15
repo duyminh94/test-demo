@@ -49,7 +49,9 @@ const useRequest = (fn, config = {}) => {
           dispatch({ type: "REQUEST_REJECTED", payload: error });
         });
     }
-  }, deps);
+  }, 
+  // eslint-disable-next-line   
+  deps);
 
   const result = isManual ? request : state.data;
 
