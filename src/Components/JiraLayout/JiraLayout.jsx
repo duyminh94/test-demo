@@ -1,20 +1,24 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { Outlet, Navigate } from 'react-router-dom'
 import MenuJira from '../JiraPage/MenuJira/MenuJira'
 import SideBarJira from "../JiraPage/SiderBarJira"
+import Header from '../Header'
 
 const JiraLayout = () => {
-  // const {users} = useSelector((state) => state.auth)
-
-  // if(!users) {
-  //     return <Navigate to="/" replace/>
-  // }
+  const user = JSON.parse(localStorage.getItem("user"))
+  if (!user) {
+    return <Navigate to="/login" />
+  }
   return (
     <div className='jira'>
       <SideBarJira />
       <MenuJira />
-      <Outlet />
+      <div className='container p-0 m-0'>
+        <div className='d-flex flex-column justify-content-center align-items-center'>
+          <Header />
+          <Outlet />
+        </div>
+      </div>
 
     </div>
   )

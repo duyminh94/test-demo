@@ -17,7 +17,7 @@ const Error404 = () => {
             <div className='err'>
                 <h1>!404!</h1>
                 <p>Page not found</p>
-                <Link to="admin/board" className='home-error'>Trở Lại Trang Admin</Link>
+                <Link to={"admin/board" || "/login"} className='home-error'>Trở Lại Trang Admin</Link>
             </div>
         </div>
     )

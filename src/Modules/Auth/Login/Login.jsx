@@ -39,7 +39,6 @@ const Login = () => {
   const onSubmit = async (values) => {
     try {
       await dispatch(login(values)).unwrap();
-
       swal.fire({
         text: "Xin chào " + values.email,
         title: "Đăng nhập thành công",
@@ -74,10 +73,10 @@ const Login = () => {
     }
   }
 
-  if (user) {
+  // if (user) {
     
-    return <Navigate to="/login" replace />;
-  }
+  //   return <Navigate to={"/login"} replace />;
+  // }
   return (
     <div className="container-fluid p-0" style={{ overflow: "hidden", position: "relative" }}>
       <Layout className="row">

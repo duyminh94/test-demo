@@ -9,7 +9,7 @@ const SideBarJira = () => {
         dispatch(logout());
         navigate("/login")
     }
-
+        
    
 
     return (
