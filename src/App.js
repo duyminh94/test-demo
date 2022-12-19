@@ -1,35 +1,37 @@
-import { Route,  Routes } from "react-router-dom";
-import AuthLayout from "./Components/AuthLayout";
-import Error404 from "./Components/Error/Error404";
-import JiraLayout from "./Components/JiraLayout/JiraLayout";
-import Board from "./Components/JiraPage/Board";
-import Login from "./Modules/Auth/Login";
-import Regsiter from "./Modules/Auth/Regsiter";
-import UserManager from "./Modules/UserManager";
+import { Route, Routes } from "react-router-dom";
+import React, { lazy, Suspense } from "react";
+import {
+  LoadingProvider,
+} from "./Components/Loading/loading.context";
 
-
+const AuthLayout = lazy(() => import("./Components/AuthLayout"));
+const Login = lazy(() => import("./Modules/Auth/Login"));
+const Regsiter = lazy(() => import("./Modules/Auth/Regsiter"));
+const JiraLayout = lazy(() => import("./Components/JiraLayout/JiraLayout"));
+const Board = lazy(() => import("./Components/JiraPage/Board"));
+const UserManager = lazy(() => import("./Modules/UserManager"));
+const Error404 = lazy(() => import("./Components/Error/Error404"));
 
 function App() {
   return (
-   
     <>
-      <Routes>
-        <Route path="/" element={<AuthLayout />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Regsiter/>} />
-
-        <Route path="admin" element={<JiraLayout/>}>
-          <Route path="board" element={<Board/>}/>
-          <Route path="usermanagement" element={<UserManager/>}/>
-        </Route>
-
-        <Route path="*" element={<Error404/>}/>
+      <Suspense fallback={<LoadingProvider/>}>
         
-      </Routes>
-      
+          <Routes>
+            <Route path="/" element={<AuthLayout />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Regsiter />} />
+
+            <Route path="admin" element={<JiraLayout />}>
+              <Route path="board" element={<Board />} />
+              <Route path="usermanagement" element={<UserManager />} />
+            </Route>
+
+            <Route path="*" element={<Error404 />} />
+          </Routes>
+       
+      </Suspense>
     </>
-    
-    
   );
 }
 

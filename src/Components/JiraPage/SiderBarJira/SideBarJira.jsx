@@ -10,8 +10,6 @@ const SideBarJira = () => {
         navigate("/login")
     }
         
-   
-
     return (
         <>
             <div className="sideBar">

@@ -2,17 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { Button, Form, Input, Layout } from "antd";
 import { UserOutlined, TwitterOutlined, FacebookOutlined, LockOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, Navigate, useSearchParams, useNavigate  } from 'react-router-dom';
+import { NavLink, useNavigate  } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 import { login } from '../../../Slice/authSlice';
 import swal from 'sweetalert2';
 
 const Login = () => {
   const dispatch = useDispatch();
-  const [searchParams] = useSearchParams()
   const navigate = useNavigate()
   const { Sider, Content } = Layout
-  const { user, isloading } = useSelector((state) => state.auth)
+  const {  isloading } = useSelector((state) => state.auth)
 
   const [{ width, height }, setSize] = useState({
     width: Math.round(window.innerWidth),
@@ -73,10 +72,7 @@ const Login = () => {
     }
   }
 
-  // if (user) {
-    
-  //   return <Navigate to={"/login"} replace />;
-  // }
+ 
   return (
     <div className="container-fluid p-0" style={{ overflow: "hidden", position: "relative" }}>
       <Layout className="row">

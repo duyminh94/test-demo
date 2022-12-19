@@ -19,7 +19,6 @@ const JiraLayout = () => {
           <Outlet />
         </div>
       </div>
-
     </div>
   )
 }

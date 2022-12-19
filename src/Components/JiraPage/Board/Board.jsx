@@ -8,7 +8,7 @@ const Board = () => {
                 <div className="col-4">
                     <img
                         style={{ width: '280px', height: '280px', borderRadius: '50%', objectFit: 'cover' }}
-                        src="https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/136623507/original/2686a3e210b7a0eb070bb3e3e4d858418795a044/draw-a-chibi-version-of-your-pet.jpg"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTLP5fUc7wx7ZPuW3jdw-f5HzJxOBx2u6K0Q&usqp=CAU"
                         alt="1"
                     />
                 </div>

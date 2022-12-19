@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import "./menu.css"
 const MenuJira = () => {
   return (
     <div className="menu">
@@ -9,7 +10,6 @@ const MenuJira = () => {
         </div>
         <div className="account-info">
           <p className="font-weight-bold">React Jira Clone</p>
-          <p>Software Project</p>
         </div>
       </div>
       <div className="control">
